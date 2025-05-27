@@ -4,9 +4,8 @@
   "description": "This site is similar to airbnb",
   "main": "app.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "node app.js",
+    "start": "node app.js"
   },
   "author": "Harsh",
   "license": "ISC",
@@ -25,6 +24,7 @@
     "multer-storage-cloudinary": "^4.0.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^8.0.0"
+    "passport-local-mongoose": "^8.0.0",
+    "vite": "^6.3.5"
   }
 }
