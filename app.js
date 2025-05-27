@@ -1,6 +1,7 @@
-if(process.env.NODE_ENV != "production") {
+if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -17,7 +18,6 @@ const User = require("./models/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
-const { log } = require("console");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -33,25 +33,23 @@ const sessionOptions = {
     cookie: {
         expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly: true
-    }
+        httpOnly: true,
+    },
 };
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
-main().then(() => {
-    console.log("Connected to DB");
-}).catch((err) => {
-    console.log(err);
-});
+main()
+    .then(() => {
+        console.log("Connected to DB");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 async function main() {
     await mongoose.connect(MONGO_URL);
-};
-
-// app.get("/", (req, res) => {
-//     res.send("Welcome to WanderLust");
-// });
+}
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -74,19 +72,10 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-// app.get("/testlisting", async (req, res) => {
-//     let sampleListing = new Listing({
-//         title: "My new villa",
-//         description: "By the Beach",
-//         price: 1200,
-//         location: "Delhi, India",
-//         country: "India"
-//     });
-
-//     await sampleListing.save();
-//     console.log("SampleListing is saved");
-//     res.send("Successful Testing");
-// });
+// Root route added here
+app.get("/", (req, res) => {
+    res.send("Welcome to WanderLust! Your app is running.");
+});
 
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found"));
@@ -96,9 +85,8 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong!" } = err;
     res.status(statusCode).render("error.ejs", { message });
-    // res.status(statusCode).send(message);
 });
 
 app.listen(8080, () => {
-    console.log("Server is listining to port no 8080");
+    console.log("Server is listening on port 8080");
 });
