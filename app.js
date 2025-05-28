@@ -74,8 +74,9 @@ app.use("/", userRouter);
 
 // Root route added here
 app.get("/", (req, res) => {
-    res.send("Welcome to WanderLust! Your app is running.");
+    res.redirect("/listings");
 });
+
 
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found"));

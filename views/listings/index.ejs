@@ -1,140 +1,111 @@
 <% layout("/layouts/boilerplate") %>
 
-    <style>
-        #filters {
-            margin-top: 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
+<style>
+    #filters {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
 
-        .filter {
-            text-align: center;
-            opacity: 0.7;
-            cursor: pointer;
-        }
+    .filter {
+        text-align: center;
+        opacity: 0.7;
+        cursor: pointer;
+    }
 
-        .filter:hover {
-            opacity: 1;
-        }
+    .filter:hover {
+        opacity: 1;
+    }
 
-        .filter p {
-            font-size: 0.8rem;
-        }
+    .filter p {
+        font-size: 0.8rem;
+    }
 
-        .tax-info {
-            display: none;
-        }
+    .tax-info {
+        display: none;
+    }
 
-        .tax-toggle {
-            border: 1px solid gray;
-            border-radius: 1rem;
-            padding: 0.8rem;
-            height: 3.2rem;
-            margin-left: 3.5rem;
-        }
-    </style>
+    .tax-toggle {
+        border: 1px solid gray;
+        border-radius: 1rem;
+        padding: 0.8rem;
+        height: 3.2rem;
+        margin-left: 3.5rem;
+    }
+</style>
 
-    <div id="filters">
-        <div class="filter">
-            <div><i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-bed"></i></div>
-            <p>Rooms</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain-city"></i></div>
-            <p>Iconic Cities</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain-sun"></i></div>
-            <p>Mountains</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-brands fa-fort-awesome"></i></div>
-            <p>Castles</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-tree-city"></i></div>
-            <p>Tree House</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-bell-concierge"></i></div>
-            <p>Beaches</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-golf-ball-tee"></i></div>
-            <p>Luxe</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-campground"></i></div>
-            <p>Camping</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-igloo"></i></div>
-            <p>Snow Cities</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Amazing Pools</p>
-        </div>
-        <!-- <div class="filter">
-            <div><i class="fa-solid fa-football"></i></div>
-            <p>Play</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-igloo"></i></div>
-            <p>Island</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-gopuram"></i></div>
-            <p>Monuments</p>
-        </div> -->
+<!-- Hero Section -->
+<div class="container my-4">
+    <div class="p-4 text-center bg-light rounded shadow-sm">
+        <h1 class="display-5">Welcome to WanderLust 🌍</h1>
+        <p class="lead">Discover your next adventure – Mountains, Beaches, Castles & more.</p>
+        <form class="d-flex justify-content-center mt-3" action="/listings/search" method="GET">
+            <input class="form-control w-50" type="search" name="location" placeholder="Search by destination..." aria-label="Search">
+            <button class="btn btn-primary ms-2" type="submit">Search</button>
+        </form>
+    </div>
+</div>
 
-        <div class="tax-toggle">
-            <div class="form-check-reverse form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
-                <label class="form-check-label" for="flexSwitchCheckChecked">Display total after taxes</label>
-            </div>
+<!-- Filter Icons -->
+<div id="filters">
+    <div class="filter"><div><i class="fa-solid fa-fire"></i></div><p>Trending</p></div>
+    <div class="filter"><div><i class="fa-solid fa-bed"></i></div><p>Rooms</p></div>
+    <div class="filter"><div><i class="fa-solid fa-mountain-city"></i></div><p>Iconic Cities</p></div>
+    <div class="filter"><div><i class="fa-solid fa-mountain-sun"></i></div><p>Mountains</p></div>
+    <div class="filter"><div><i class="fa-brands fa-fort-awesome"></i></div><p>Castles</p></div>
+    <div class="filter"><div><i class="fa-solid fa-tree-city"></i></div><p>Tree House</p></div>
+    <div class="filter"><div><i class="fa-solid fa-bell-concierge"></i></div><p>Beaches</p></div>
+    <div class="filter"><div><i class="fa-solid fa-golf-ball-tee"></i></div><p>Luxe</p></div>
+    <div class="filter"><div><i class="fa-solid fa-campground"></i></div><p>Camping</p></div>
+    <div class="filter"><div><i class="fa-solid fa-igloo"></i></div><p>Snow Cities</p></div>
+    <div class="filter"><div><i class="fa-solid fa-person-swimming"></i></div><p>Amazing Pools</p></div>
+
+    <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+            <label class="form-check-label" for="flexSwitchCheckChecked">Display total after taxes</label>
         </div>
     </div>
+</div>
 
+<!-- Listings Section -->
+<% if (allListings.length === 0) { %>
+    <div class="text-center my-5">
+        <h4>No listings found for this search.</h4>
+        <a href="/listings" class="btn btn-outline-secondary mt-3">Back to all listings</a>
+    </div>
+<% } else { %>
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
         <% for(let listing of allListings){ %>
             <a href="/listings/<%= listing._id %>" class="listing-link">
                 <div class="card col listing-card">
                     <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title"></h5>
-                        <p class="card-text"></p>
-                        <p class="card-text"><small></small></p>
-                    </div>
                     <div class="card-body">
-                        <p class="card-text"><b>
-                                <%= listing.title %>
-                            </b><br />
+                        <p class="card-text">
+                            <b><%= listing.title %></b><br />
                             <% if(listing.price){ %>
-                                <%= listing.price.toLocaleString("en-IN") %> / night
-                                    <% } %> <i class="tax-info">&nbsp; +18% Gst</i>
+                                ₹<%= listing.price.toLocaleString("en-IN") %> / night
+                                <i class="tax-info">&nbsp; +18% GST</i>
+                            <% } %>
                         </p>
                     </div>
                 </div>
             </a>
-            <% } %>
+        <% } %>
     </div>
+<% } %>
 
-    <script>
-        let taxSwitch = document.getElementById("flexSwitchCheckChecked");
-        taxSwitch.addEventListener("click", ()=> {
-            let taxInfo = document.getElementsByClassName("tax-info");
-            for(info of taxInfo) {
-                if(info.style.display != "inline") {
-                    info.style.display = "inline";
-                } else {
-                    info.style.display = "none";
-                }
+<script>
+    let taxSwitch = document.getElementById("flexSwitchCheckChecked");
+    taxSwitch.addEventListener("click", () => {
+        let taxInfo = document.getElementsByClassName("tax-info");
+        for (info of taxInfo) {
+            if (info.style.display !== "inline") {
+                info.style.display = "inline";
+            } else {
+                info.style.display = "none";
             }
-        })
-    </script>
+        }
+    });
+</script>
