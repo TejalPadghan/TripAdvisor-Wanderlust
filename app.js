@@ -37,18 +37,19 @@ const sessionOptions = {
     },
 };
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+// ✅ Use DB_URL from environment or fallback to local MongoDB
+const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/wanderlust";
 
 main()
     .then(() => {
         console.log("Connected to DB");
     })
     .catch((err) => {
-        console.log(err);
+        console.error("MongoDB connection error:", err);
     });
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
 }
 
 app.use(session(sessionOptions));
@@ -72,22 +73,23 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-// Root route added here
+// Root route
 app.get("/", (req, res) => {
     res.redirect("/listings");
 });
-
 
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found"));
 });
 
-// Middleware to handle errors
+// Error handler
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong!" } = err;
     res.status(statusCode).render("error.ejs", { message });
 });
 
-app.listen(8080, () => {
-    console.log("Server is listening on port 8080");
+// Use PORT from environment in deployment, fallback to 8080 locally
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
 });
