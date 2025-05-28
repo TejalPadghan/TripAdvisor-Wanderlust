@@ -15,17 +15,20 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
+// Routes
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
+// View engine setup
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.engine("ejs", ejsMate);
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+// Session config
 const sessionOptions = {
     secret: "mysupersecretcode",
     resave: false,
@@ -36,31 +39,17 @@ const sessionOptions = {
         httpOnly: true,
     },
 };
-
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-
-main()
-    .then(() => {
-        console.log("Connected to DB");
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
-async function main() {
-    await mongoose.connect(MONGO_URL);
-}
-
 app.use(session(sessionOptions));
 app.use(flash());
 
+// Passport setup
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
-
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Flash messages middleware
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
@@ -68,25 +57,40 @@ app.use((req, res, next) => {
     next();
 });
 
+// Routes
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-// Root route added here
+// Root route
 app.get("/", (req, res) => {
-    res.send("Welcome to WanderLust! Your app is running.");
+    res.redirect("/listings");
 });
 
+// 404 handler
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found"));
 });
 
-// Middleware to handle errors
+// Global error handler
 app.use((err, req, res, next) => {
-    let { statusCode = 500, message = "Something went wrong!" } = err;
+    const { statusCode = 500, message = "Something went wrong!" } = err;
     res.status(statusCode).render("error.ejs", { message });
 });
 
-app.listen(8080, () => {
-    console.log("Server is listening on port 8080");
+// ✅ MongoDB connection
+const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/wanderlust";
+
+mongoose.connect(dbUrl)
+    .then(() => {
+        console.log("✅ Connected to MongoDB");
+    })
+    .catch((err) => {
+        console.error("❌ MongoDB connection error:", err);
+    });
+
+// Start server
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+    console.log(`🚀 Server is listening on port ${port}`);
 });
