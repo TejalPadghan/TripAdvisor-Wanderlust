@@ -1,0 +1,85 @@
+{
+    "id": "33bafe3f-d43c-4afb-9834-4046f799748e",
+    "task_name": "my-task",
+    "trial_name": "my-task__QYsrupn",
+    "trial_uri": "file:///C:/Users/Tejal/TripAdvisor-Wanderlust/jobs/2026-05-05__17-03-42/my-task__QYsrupn",
+    "task_id": {
+        "path": "my-task"
+    },
+    "source": null,
+    "task_checksum": "0fb73a175021fd020ef40ecdda08c4d79e25dee9e8dba0f7bbf4f72d2f0b9c0b",
+    "config": {
+        "task": {
+            "path": "my-task",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "my-task__QYsrupn",
+        "trials_dir": "jobs\\2026-05-05__17-03-42",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "nop",
+            "import_path": null,
+            "model_name": null,
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "4f9c70ea-467f-44d2-b00b-a62ab7cda6bf"
+    },
+    "agent_info": {
+        "name": "nop",
+        "version": "1.0.0",
+        "model_info": null
+    },
+    "agent_result": null,
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "RuntimeError",
+        "exception_message": "Docker compose command failed for environment my-task. Command: docker compose --project-name my-task__qysrupn --project-directory C:\\Users\\Tejal\\TripAdvisor-Wanderlust\\my-task\\environment -f C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\harbor\\environments\\docker\\docker-compose-base.yaml -f C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\harbor\\environments\\docker\\docker-compose-build.yaml build. Return code: 1. Stdout:  Image my-task__qysrupn-main Building \n#1 [internal] load local bake definitions\n#1 reading from stdin 587B done\n#1 DONE 0.0s\n\n#2 [internal] load build definition from Dockerfile\n#2 transferring dockerfile: 238B 0.0s done\n#2 WARN: InvalidDefaultArgInFrom: Default value for ARG <PASTE_EXACT_APPROVED_REPO_IMAGE_HERE> results in empty or invalid base image name (line 1)\n#2 DONE 0.0s\nDockerfile:1\n\n--------------------\n\n   1 | >>> FROM <PASTE_EXACT_APPROVED_REPO_IMAGE_HERE>\r\n\n   2 |     \r\n\n   3 |     WORKDIR /app\r\n\n--------------------\n\nfailed to solve: failed to parse stage name \"<PASTE_EXACT_APPROVED_REPO_IMAGE_HERE>\": invalid reference format: repository name (library/<PASTE_EXACT_APPROVED_REPO_IMAGE_HERE>) must be lowercase\n\n. Stderr: None. ",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\harbor\\trial\\trial.py\", line 951, in run\n    await self._setup_environment()\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\harbor\\trial\\trial.py\", line 313, in _setup_environment\n    await self._start_environment_with_retry()\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\tenacity\\asyncio\\__init__.py\", line 193, in async_wrapped\n    return await copy(fn, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\tenacity\\asyncio\\__init__.py\", line 112, in __call__\n    do = await self.iter(retry_state=retry_state)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\tenacity\\asyncio\\__init__.py\", line 157, in iter\n    result = await action(retry_state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\tenacity\\_utils.py\", line 111, in inner\n    return call(*args, **kwargs)\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\tenacity\\__init__.py\", line 393, in <lambda>\n    self._add_action_func(lambda rs: rs.outcome.result())\n                                     ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\python\\cpython-3.13.13-windows-x86_64-none\\Lib\\concurrent\\futures\\_base.py\", line 449, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\python\\cpython-3.13.13-windows-x86_64-none\\Lib\\concurrent\\futures\\_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\tenacity\\asyncio\\__init__.py\", line 116, in __call__\n    result = await fn(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\harbor\\trial\\trial.py\", line 325, in _start_environment_with_retry\n    await asyncio.wait_for(\n    ...<4 lines>...\n    )\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\python\\cpython-3.13.13-windows-x86_64-none\\Lib\\asyncio\\tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\harbor\\environments\\docker\\docker.py\", line 478, in start\n    await self._run_docker_compose_command([\"build\"])\n  File \"C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\harbor\\environments\\docker\\docker.py\", line 382, in _run_docker_compose_command\n    raise RuntimeError(\n    ...<5 lines>...\n    )\nRuntimeError: Docker compose command failed for environment my-task. Command: docker compose --project-name my-task__qysrupn --project-directory C:\\Users\\Tejal\\TripAdvisor-Wanderlust\\my-task\\environment -f C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\harbor\\environments\\docker\\docker-compose-base.yaml -f C:\\Users\\Tejal\\AppData\\Roaming\\uv\\tools\\harbor\\Lib\\site-packages\\harbor\\environments\\docker\\docker-compose-build.yaml build. Return code: 1. Stdout:  Image my-task__qysrupn-main Building \n#1 [internal] load local bake definitions\n#1 reading from stdin 587B done\n#1 DONE 0.0s\n\n#2 [internal] load build definition from Dockerfile\n#2 transferring dockerfile: 238B 0.0s done\n#2 WARN: InvalidDefaultArgInFrom: Default value for ARG <PASTE_EXACT_APPROVED_REPO_IMAGE_HERE> results in empty or invalid base image name (line 1)\n#2 DONE 0.0s\nDockerfile:1\n\n--------------------\n\n   1 | >>> FROM <PASTE_EXACT_APPROVED_REPO_IMAGE_HERE>\r\n\n   2 |     \r\n\n   3 |     WORKDIR /app\r\n\n--------------------\n\nfailed to solve: failed to parse stage name \"<PASTE_EXACT_APPROVED_REPO_IMAGE_HERE>\": invalid reference format: repository name (library/<PASTE_EXACT_APPROVED_REPO_IMAGE_HERE>) must be lowercase\n\n. Stderr: None. \n",
+        "occurred_at": "2026-05-05T17:03:49.839286"
+    },
+    "started_at": "2026-05-05T11:33:47.402250Z",
+    "finished_at": "2026-05-05T11:33:50.110457Z",
+    "environment_setup": {
+        "started_at": "2026-05-05T11:33:48.190265Z",
+        "finished_at": "2026-05-05T11:33:49.823034Z"
+    },
+    "agent_setup": null,
+    "agent_execution": null,
+    "verifier": null,
+    "step_results": null
+}

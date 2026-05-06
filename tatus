@@ -1,0 +1,10 @@
+[33m63737b5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m connected to mongo and add env config
+[33mea96366[m connected to mongo and add env config
+[33m211d6f5[m connected to mongo and add env config
+[33mbfdd757[m connected to mongo and add env config
+[33me56c8a6[m use env var for DB_URL
+[33m00e1023[m add search functionality and update listing controller and views
+[33m06b339c[m add root route to app.js
+[33m3ae8ff1[m make changes
+[33me0c5636[m push wanderlust folder into root
+[33m7508aee[m Merge branch 'main' of https://github.com/TejalPadghan/TripAdvisor-Wanderlust
